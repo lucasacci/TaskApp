@@ -5,14 +5,20 @@ import { ListaTareas } from "./ListaTareas";
 export const Formulario = () => {
   const [tarea, setTarea] = useState("");
 
-  const [arreglotareas, setArreglotareas] = useState([]);
+  const [arregloTareas, setArreglotareas] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    setArreglotareas(...arreglotareas, tarea);
+    
+    setArreglotareas(...arregloTareas, tarea);
     setTarea('')
   };
+
+  const deleteTask = (nombre) =>{
+    let array = arregloTareas.filter((item) => item !== nombre);
+
+    setArreglotareas(array);
+  }
 
   return (
     <div>
@@ -30,7 +36,7 @@ export const Formulario = () => {
           </Button>
         </Form.Group>
       </Form>
-      <ListaTareas />
+      <ListaTareas arregloTareas={arregloTareas} deleteTask={deleteTask}/>
     </div>
   );
 };
